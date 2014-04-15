@@ -1,0 +1,23 @@
+- name: Tic Tac Toe
+  url: //warycat.com/TicTacToe
+  info: A simple javascript game with unbeatable AI.
+
+- name: Blockers
+  url: //warycat.com/TicTacToe
+  info: A multiplayer realtime html5 web game.
+
+- name: Super Sea Lion
+  url: //warycat.com/SuperSeaLion
+  info: A 2D html5 javascript web action game.
+
+- name: Wolf 3D
+  url: //warycat.com/Wolf3d
+  info: A 3D html5 javascript web game engine.
+
+- name: WBWX
+  url: //warycat.com/wbwx
+  info: A photo sharing social network based on universities in China.
+
+- name: Calstate LA University Student Union
+  url: //www.calstatelausu.org
+  info: A php mysql university web site

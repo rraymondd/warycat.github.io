@@ -4,6 +4,15 @@ title: Your New Jekyll Site
 ---
 
 <div id="home">
+  <h1>Projects</h1>
+  <ul class="posts">
+  	{% for project in site.data.projects %}
+      <li>&raquo; <a href={{ project.url }}> {{ project.name }} </a><br/>
+      	<span>{{ project.info }}</span><br/>
+      </li>
+      <br/>
+    {% endfor %}
+  </ul>
   <h1>Blog Posts</h1>
   <ul class="posts">
     {% for post in site.posts %}

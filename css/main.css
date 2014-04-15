@@ -49,6 +49,14 @@ a:visited { color: #a0a; }
   font-size: 80%;
 }
 
+@media screen and (max-width: 520px) {
+  .posts span {
+    color: #aaa;
+    font-family: Monaco, "Courier New", monospace;
+    font-size: 60%;
+  }
+}
+
 /*****************************************************************************/
 /*
 /* Site
@@ -58,10 +66,21 @@ a:visited { color: #a0a; }
 .site {
   font-size: 115%;
   text-align: justify;
+  padding-left: 2em;
+  padding-right: 2em;
   width: 42em;
   margin: 3em auto 2em;
   line-height: 1.5em;
 }
+
+@media screen and (max-width: 520px) {
+  .site {
+    font-size: 130%;
+    width: 300px;
+  } 
+}
+
+
 
 .header a {
   font-weight: bold;

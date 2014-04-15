@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Welcome to Warycat!"
 date:   2014-04-12 21:59:53
 categories: jekyll update
 ---
