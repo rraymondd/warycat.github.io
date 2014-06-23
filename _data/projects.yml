@@ -1,27 +1,34 @@
-- name: Tic Tac Toe
-  url: //warycat.com/TicTacToe
-  info: A simple javascript game with unbeatable AI.
-
-- name: Blockers
-  url: //warycat.com/TicTacToe
-  info: A multiplayer realtime html5 web game.
-
-- name: Super Sea Lion
-  url: //warycat.com/SuperSeaLion
-  info: A 2D html5 javascript web action game.
-
-- name: Wolf 3D
-  url: //warycat.com/Wolf3d
-  info: A 3D html5 javascript web game engine.
+- name: Calstate LA University Student Union
+  url: //www.calstatelausu.org
+  info: A university web site back by php & mysql.
 
 - name: WBWX
   url: //warycat.com/wbwx
   info: A photo sharing social network based on universities in China.
 
-- name: Calstate LA University Student Union
-  url: //www.calstatelausu.org
-  info: A php mysql university web site.
+- name: Lucky 777
+  url: //warycat.com/lucky7
+  info: A javascript classic slot machine game runs in mobile safari.
+
+- name: Super Sea Lion
+  url: //warycat.com/SuperSeaLion
+  info: A 2D html5 javascript web action game demo features skelenton animation.
+
+- name: Tic Tac Toe
+  url: //warycat.com/TicTacToe
+  info: A beautiful javascript game with a simple ai.
 
 - name: candle.js
   url: //warycat.com/candle.js
   info: A JavaScript 2.5D Rendering Engine
+
+- name: Blockers
+  url: //warycat.com/Blockers
+  info: A multiplayer realtime html5 web game. not ready yet
+
+- name: Wolf 3D
+  url: //warycat.com/Wolf3d
+  info: A 3D html5 javascript web game engine. not ready yet
+
+
+
