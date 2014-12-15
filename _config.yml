@@ -1,5 +1,5 @@
 # Site settings
-title: 丽猫电商
+title: 代理注册
 email: larry@warycat.com
 description: "Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description."
 
@@ -11,7 +11,7 @@ color:
   
 # Footer settings
 footer:
-  copyright: 丽猫电商
+  copyright: warycat.com
   location: Location
   social: Around the Web
   credits: Credits

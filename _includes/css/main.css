@@ -443,3 +443,21 @@ footer .footer-below {
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+.circular {
+    width: 300px;
+    height: 300px;
+    transition:all 0.5s;
+    border-radius: 50%;
+    background: url(img/logoCat.jpeg) no-repeat center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.circular:hover{
+    border-radius: 0%;
+    background: url(img/qrlogin.jpg) no-repeat center;
+    -webkit-border-radius: 0%;
+    -moz-border-radius: 0%;
+}
