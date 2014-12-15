@@ -35,3 +35,9 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+$(function(){
+    $('loginBtn').tap(function(){
+        window.open('http://weixin.qq.com/r/O3W6olnE9wSIrR3B9yAp');
+    });
+});
