@@ -367,7 +367,7 @@ footer .footer-below {
     height: 300px;
     transition: all 0.5s;
     border-radius: 50%;
-    background: url(/img/logoCat.jpeg) no-repeat center;
+    background: url(/img/logoCat.jpg) no-repeat center;
     box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);

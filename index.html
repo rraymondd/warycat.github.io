@@ -67,8 +67,8 @@ layout: default
                             <div name="is_10_digits" class="text-danger tidy">10位数字 [10 digits]</div>
                         </div>
                         <div id="ssn" class="form-group col-md-6 floating-label-form-group controls">
-                            <label>Social Security Number</label>
-                            <input type="tel" class="form-control" placeholder="社会安全号 [SSN]" >
+                            <label>Social Security Number Optional</label>
+                            <input type="tel" class="form-control" placeholder="社会安全号 [SSN] 选填 [Optional]" >
                             <div name="isRequired" class="text-danger tidy">必填 [required]</div>
                             <div name="is_9_digits" class="text-danger tidy">9位数字 [9 digits]</div>
                         </div>
@@ -101,6 +101,24 @@ layout: default
                             <div name="isRequired" class="text-danger tidy">必填 [required]</div>
                             <div name="is_5_digits" class="text-danger tidy">5位数字 [5 digits]</div>
                         </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div id="routing" class="form-group col-md-6 floating-label-form-group controls">
+                            <label>Routing Number</label>
+                            <input type="tel" class="form-control" placeholder="银行代码 [Routing Number]">
+                            <div name="isRequired" class="text-danger tidy">必填 [required]</div>
+                            <div name="is_9_digits" class="text-danger tidy">9位数字 [9 digits]</div>
+                        </div>
+                        <div id="account" class="form-group col-md-6 floating-label-form-group controls">
+                            <label>Account Number</label>
+                            <input type="tel" class="form-control" placeholder="账户代码 [Account Number]">
+                            <div name="isRequired" class="text-danger tidy">必填 [required]</div>
+                            <div name="isNumeric" class="text-danger tidy">数字 [numeric]</div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src='/img/check.jpg' class="img-responsive center-block">
                     </div>
                     <br>
                     <div id="success"></div>
