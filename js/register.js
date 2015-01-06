@@ -104,7 +104,7 @@ function postSubmerchant(dict){
         url:'https://008.io/braintree/submerchant',
         dataType:'json',
         data:JSON.stringify(dict),
-        success:function(data){window.alert(data);}
+        success:function(data){window.alert(JSON.stringify(data));}
     });
 }
 
