@@ -1,0 +1,4 @@
+- text: "Email: larry@warycat.com"
+  url: "mailto:larry@warycat.com"
+- text: "Phone: (626) 628 6332"
+  url: "tel:6266286332"
