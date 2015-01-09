@@ -9,7 +9,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index.html">{{site.title}}</a>
+                {% if page.layout == "default" || page.layout == "page" %}
+                    <a class="navbar-brand" href="/index.html">WARYCAT</a>
+                {% endif %}
+
+                {% if page.layout == "default_cn" || page.layout == "page_cn" %}
+                    <a class="navbar-brand" href="/cn">丽猫电商</a>
+                {% endif %}
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
