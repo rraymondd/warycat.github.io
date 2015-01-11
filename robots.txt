@@ -1,3 +1,4 @@
 User-agent: *
 Disallow:
-Sitemap: http://www.warycat.com/sitemap.xml
+Sitemap: http://warycat.com/sitemap.xml
+Host: warycat.com
