@@ -31,3 +31,5 @@ credits: 'Freelance is a free to use, open source Bootstrap theme created by <a 
 # Build settings
 markdown: kramdown
 permalink: pretty
+gems:
+  - jekyll-sitemap
