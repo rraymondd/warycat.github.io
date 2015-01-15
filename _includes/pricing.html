@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             {% for post in site.categories.subscription %}
-                <div class="col-sm-2 portfolio-item">
+                <div class="col-sm-3 portfolio-item">
                     <a href="#portfolioModal-{{ post.modal-id }}" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
@@ -41,6 +41,21 @@
                 </div>
             {% endfor %}
 
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>APP Design</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+            {% for i in (1..14) %}
+                <div class="col-sm-2 portfolio-item">
+                        <img src="/img/app/app{{i}}.gif" class="img-responsive" alt="{{ post.alt }}">
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
