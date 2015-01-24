@@ -1,6 +1,6 @@
  <!-- Portfolio Modals -->
  {% for post in site.posts %}
-    <div class="portfolio-modal modal fade" id="portfolioModal-{{ post.modal-id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="portfolioModal-{{ post.merchant-id }}" >
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -9,18 +9,16 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>{{ post.title }}</h2>
-                            <hr class="star-primary">
-                            <img src="/img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="manager photo">
-                            <p>{{ post.description }}</p>
-                            <ul class="list-inline item-details">
-                                <li><strong><a href={{post.url}}>Read More</a></strong></li>
-                                <li><strong><a href="mailto:{{post.email}}">Contact Me</a></strong></li>
-                            </ul>
-                        </div>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>{{ post.title }}</h2>
+                        <hr class="star-primary">
+                        <img src="/img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="manager photo">
+                        <p>{{ post.description }}</p>
+                        <a href={{post.url}}><button class='btn btn-primary btn-lg'>Read More</button></a>
+                        {% for service in post.services %}
+                            <button class='btn btn-primary btn-lg'>{{service[0]}} ${{service[1]}}</button>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
