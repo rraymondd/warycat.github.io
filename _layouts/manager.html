@@ -10,8 +10,8 @@
                         <h2>{{ page.title }}</h2>
                         <hr class="star-primary">
                         <img src="/img/portfolio/{{ page.img }}" class="img-responsive img-centered" />
-                        <p>{{ page.description }}</p>
-                        {{ content }}
+                        <p align="left">{{ page.description }}</p>
+                        <div align="left"> {{ content }} </div>
                         <ul class="list-group btn-lg">
                         <a href="mailto:{{page.email}}"><li href='/' class='list-group-item'>Contact Me</li></a>
                         {% for service in page.services %}
