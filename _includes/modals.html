@@ -2,12 +2,7 @@
  {% for post in site.posts %}
     <div class="portfolio-modal modal fade" id="portfolioModal-{{ post.merchant-id }}" >
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
+            <div class="close-modal" data-dismiss="modal"><div class="lr"><div class="rl"></div></div></div>
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="modal-body">
@@ -15,10 +10,12 @@
                         <hr class="star-primary">
                         <img src="/img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="manager photo">
                         <p>{{ post.description }}</p>
-                        <a href={{post.url}}><button class='btn btn-primary btn-lg'>Read More</button></a>
+                        <ul class="list-group btn-lg">
+                        <a href={{post.url}}><li class='list-group-item'>Read More</li></a>
                         {% for service in post.services %}
-                            <button class='btn btn-primary btn-lg'>{{service[0]}} ${{service[1]}}</button>
+                            <a href="/"><li href='/' class='list-group-item'>{{service[0]}} ${{service[1]}}</li></a>
                         {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,6 @@
     <body>
     <div class="container">
         <div class="portfolio-modal model" id="portfolioModal-{{ page.merchant-id }}" >
-            <a href='/'><div class="close-modal" data-dismiss="modal"><div class="lr"><div class="rl"></div></div></div></a>
             <div class="modal-content">
                 <div class="col-lg-8 col-lg-offset-2" >
                     <div class="modal-body">
@@ -13,14 +12,19 @@
                         <img src="/img/portfolio/{{ page.img }}" class="img-responsive img-centered" />
                         <p>{{ page.description }}</p>
                         {{ content }}
-                        <a href="mailto:{{page.email}}"><button class='btn btn-primary btn-lg'>Contact Me</button></a>
+                        <ul class="list-group btn-lg">
+                        <a href="mailto:{{page.email}}"><li href='/' class='list-group-item'>Contact Me</li></a>
                         {% for service in page.services %}
-                            <a href='#'><button class='btn btn-primary btn-lg'>{{service[0]}} ${{service[1]}}</button></a>
+                            <a href="/"><li href='/' class='list-group-item'>{{service[0]}} ${{service[1]}}</li></a>
                         {% endfor %}
+                        </ul>
                     </div>
                     <div id="disqus_thread"></div>
                 </div>
             </div>
+            <a href='/'>
+                <div class="close-modal" data-dismiss="modal"><div class="lr"><div class="rl"></div></div></div>
+            </a>
         </div>
 	</div>
     <script type="text/javascript">
