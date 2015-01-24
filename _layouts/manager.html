@@ -13,7 +13,7 @@
                         <p align="left">{{ page.description }}</p>
                         <div align="left">{{ content }}</div>
                         <ul class="list-group btn-lg">
-                        <a href="mailto:{{page.email}}"><li href='/' class='list-group-item'>Contact Me</li></a>
+                        <a href="mailto:{{page.email}}?subject=WARYCAT {{page.title}}&cc=larry@warycat.com"><li href='/' class='list-group-item'>Contact Me</li></a>
                         {% for service in page.services %}
                             <a href="/"><li href='/' class='list-group-item'>{{service[0]}} ${{service[1]}}</li></a>
                         {% endfor %}

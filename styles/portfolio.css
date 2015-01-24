@@ -362,7 +362,7 @@ footer .footer-below {
     transform: rotate(90deg);
 }
 
-.circular {
+.weixin {
     width: 300px;
     height: 300px;
     transition: all 0.5s;
@@ -373,7 +373,7 @@ footer .footer-below {
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 
-.circular:hover {
+.weixin:hover {
     border-radius: 0%;
     background: url(/img/qrlogin.jpg) no-repeat center;
     -webkit-border-radius: 0%;

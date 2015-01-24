@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>QUICK LINKS</h3>
+                        <h3>快速链接</h3>
                         <p>
                             {% for quicklink in site.data.quicklinks %}
                                 <a href={{quicklink.url}}>{{ quicklink.text }}</a><br>
@@ -12,15 +12,15 @@
                         </p>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>LOCATIONS</h3>
+                        <h3>公司地址</h3>
                         <p>
-                            {% for address in site.data.addresses %}
+                            {% for address in site.data.addresses_cn %}
                                 {{ address }} <br>
                             {% endfor %}
                         </p>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>CONTACT LARRY</h3>
+                        <h3>联系站长</h3>
                         <p>
                             {% for contact in site.data.contacts %}
                                 <a href={{contact.url}}>{{ contact.text }}</a><br>
@@ -34,7 +34,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; warycat.com 2014 - 20{{ site.time | date: '%y' }} 
+                        版权所有 &copy; 丽猫电商 2014 - 20{{ site.time | date: '%y' }} 
                         <a href="/">English</a>
                         <a href="/index_cn">中文</a>
                     </div>
