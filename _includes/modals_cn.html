@@ -1,0 +1,24 @@
+ <!-- Portfolio Modals -->
+ {% for post in site.posts %}
+    <div class="portfolio-modal modal fade" id="portfolioModal-{{ post.merchant-id }}" >
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal"><div class="lr"><div class="rl"></div></div></div>
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="modal-body">
+                        <h2>{{ post.title }}</h2>
+                        <hr class="star-primary">
+                        <img src="/img/portfolio/{{ post.img }}" class="img-responsive img-centered" alt="manager photo">
+                        <p align="left">{{ post.description }}</p>
+                        <ul class="list-group btn-lg">
+                        <a href={{post.url}}><li class='list-group-item'>阅读更多</li></a>
+                        {% for service in post.services %}
+                            <a href="/"><li href='/' class='list-group-item'>{{service[0]}} ${{service[1]}}</li></a>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
