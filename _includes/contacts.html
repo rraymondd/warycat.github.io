@@ -1,0 +1,15 @@
+{% if page.email %}
+    <a href="mailto:{{page.email}}?subject=WARYCAT {{page.title}}&cc=larry@warycat.com">
+        <li class='list-group-item'>{{page.email}}</li>
+    </a>
+{% endif %}
+{% if page.tel %}
+    <a href="tel:{{page.tel}}">
+        <li class='list-group-item'>{{page.tel}}</li>
+    </a>
+{% endif %}
+{% if page.address %}
+    <a href="https://maps.google.com/?q={{page.address}}&t=m">
+        <li class='list-group-item'>{{page.address}}</li>
+    </a>
+{% endif %}

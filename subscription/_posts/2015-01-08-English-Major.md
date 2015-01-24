@@ -1,5 +1,5 @@
 ---
-layout: manager
+layout: company
 modal-id: 3
 date: 2015-01-08
 img: circus.png
