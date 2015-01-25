@@ -428,5 +428,9 @@ h2 {
   font-size: 5vw !important; 
 }
 p {
-  font-size: 4vmin;
+  font-size: 4vwmin;
+}
+
+li.list-group-item{
+    font-size: 3vw !important
 }
