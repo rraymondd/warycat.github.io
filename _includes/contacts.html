@@ -3,16 +3,31 @@
         <li class='list-group-item'>{{page.email}}</li>
     </a>
 {% endif %}
+
 {% if page.tel %}
     <a href="tel:{{page.tel}}">
-        <li class='list-group-item'>{{page.tel}}</li>
+        <li class='list-group-item'>tel:{{page.tel}}</li>
     </a>
 {% endif %}
+
+{% if page.tel1 %}
+    <a href="tel:{{page.tel1}}">
+        <li class='list-group-item'>tel:{{page.tel1}}</li>
+    </a>
+{% endif %}
+
+{% if page.fax %}
+    <a href="tel:{{page.fax}}">
+        <li class='list-group-item'>fax:{{page.fax}}</li>
+    </a>
+{% endif %}
+
 {% if page.address %}
     <a href="https://maps.google.com/?q={{page.address}}&t=m">
         <li class='list-group-item'>{{page.address}}</li>
     </a>
 {% endif %}
+
 {% if page.website %}
     <a href="http://{{page.website}}">
         <li class='list-group-item'>{{page.website}}</li>
