@@ -421,16 +421,15 @@ footer .footer-below {
     display: none;
 }
 
-h1 {
-  font-size: 5.9vw;
-}
-h2 {
-  font-size: 5vw !important; 
-}
-p {
-  font-size: 3.5vw;
+@media(max-width:767px) {
+    h2{
+        font-size: 5vw !important;
+    }
+    p{
+        font-size: 4.5vw;
+    }
+    li.list-group-item{
+        font-size: 4.5vw;
+    }
 }
 
-li.list-group-item{
-    font-size: 3.5vw;
-}
