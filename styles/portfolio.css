@@ -362,6 +362,43 @@ footer .footer-below {
     transform: rotate(90deg);
 }
 
+@media(max-width:767px) {
+    .portfolio-modal .close-modal {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .portfolio-modal .close-modal:hover {
+        opacity: .3;
+    }
+
+    .portfolio-modal .close-modal .lr {
+        z-index: 1051;
+        width: 1px;
+        height: 25px;
+        margin-left: 35px;
+        background-color: #2c3e50;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .portfolio-modal .close-modal .lr .rl {
+        z-index: 1052;
+        width: 1px;
+        height: 25px;
+        background-color: #2c3e50;
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
 .weixin {
     width: 300px;
     height: 300px;
@@ -391,5 +428,5 @@ h2 {
   font-size: 5vw !important; 
 }
 p {
-  font-size: 3vmin;
+  font-size: 4vmin;
 }
