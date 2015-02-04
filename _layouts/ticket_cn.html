@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    {% include head.html %}
+    <body>
+    <div class="container">
+        <div class="portfolio-modal model" >
+            <div class="modal-content">
+                <div class="col-lg-8 col-lg-offset-2" >
+                    <div class="modal-body">
+                        <h2>原价: <strike style='color:red'><span style='color:grey'>{{page.originalPrice}}<span></strike> 特价: <span style='color:red'>{{page.discountedPrice}}</span></h2>
+                        <hr class="star-primary">
+                        <p>{{ page.title }}</p>
+                        <img src="/img/ticket/{{ page.img }}" class="img-responsive img-centered" />
+                        <p align="left">{{ page.description }}</p>
+                        <div align="left">{{ content }}</div>
+                        {% include formTicket_cn.html %}
+                        {% include salesTicket_cn.html %}
+                    </div>
+                    <div id="disqus_thread"></div>
+                </div>
+            </div>
+            <a href='/index_cn'>
+                <div class="close-modal" data-dismiss="modal"><div class="lr"><div class="rl"></div></div></div>
+            </a>
+        </div>
+	</div>
+    <script src="/js/disqus_cn.js"></script>
+    </body>
+</html>

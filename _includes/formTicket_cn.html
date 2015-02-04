@@ -1,0 +1,43 @@
+<hr class="star-primary">
+<h3>电子订票</h3>
+<div class="row control-group">
+    <div id="CardNo" class="form-group col-md-6 floating-label-form-group controls">
+        <label>信用卡号码</label>
+        <input type="tel" class="form-control" placeholder="378282246310005">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="CardExp" class="form-group col-md-2 floating-label-form-group controls">
+        <label>有效期</label>
+        <input type="tel" class="form-control" placeholder="1217">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="CardCVV" class="form-group col-md-2 floating-label-form-group controls">
+        <label>安全码</label>
+        <input type="tel" class="form-control" placeholder="008">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="Quantity" class="form-group col-md-2 floating-label-form-group controls">
+        <label>数量</label>
+        <input type="tel" class="form-control" placeholder="1">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+
+    <div id="Email1" class="form-group col-md-4 floating-label-form-group controls">
+        <label>取票邮箱</label>
+        <input type="email" class="form-control" placeholder="someone@example.com">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="Email2" class="form-group col-md-4 floating-label-form-group controls">
+        <label>邮箱确认</label>
+        <input type="email" class="form-control" placeholder="someone@example.com">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="submit" class="form-group col-md-4 floating-label-form-group controls">
+        <label>安全支付</label>
+        <button class="btn btn-success btn-block" type="button">特价: {{page.discountedPrice}}</button>
+    </div>
+    <div id="Success" class="form-group col-md-12 floating-label-form-group controls">
+        <label>收款失败，请正确填写信用卡信息。</label>
+        <button class="btn btn-danger btn-block" type="button">重新填写</button>
+    </div>
+</div>
