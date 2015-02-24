@@ -107,7 +107,8 @@ $('#Pay > button').click(function(){
     $('#Pay').hide();
     $('#Wait').fadeIn();
     var mm = cardExp.substring(0,2);
-    var yy = cardExp.substring(2,2);
+    var yy = cardExp.substring(2,4);
+    console.log(mm,yy);
     $.getJSON(bturl + '/token',function(data){
         var client = new braintree.api.Client({clientToken:data.clientToken});
         var card = {
