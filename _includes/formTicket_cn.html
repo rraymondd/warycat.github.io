@@ -28,7 +28,7 @@
     </div>
     <div id="Pay" class="form-group col-xs-12 floating-label-form-group controls">
         <label>安全支付</label>
-        <button class="btn btn-success btn-block" type="button">特价: $<span>0</span></button>
+        <button class="btn btn-success btn-block" type="button">特价: $<span id="total">0</span></button>
     </div>
     <div id="Wait" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
         <label>正在处理</label>
@@ -52,24 +52,67 @@
 
 <script>
 
+var retail = '{{retail}}';
 var productID = '{{ticketID}}';
+
+$('#Quantity > input').change(function(){
+    var quantity = $('#Quantity > input').val();
+    $('#total').text(parseInt(retail) * parseInt(quantity));
+});
 
 var bturl = 'https://008.io/braintree/2';
 // var bturl = 'http://localhost:3000/braintree/0';
 $('#Pay > button').click(function(){
-    $('#Pay').hide();
-    $('#Wait').fadeIn();
     // soldoutInput();
     var cardNo = $('#CardNo > input').val();
     var cardExp = $('#CardExp > input').val();
     var cardCVV = $('#CardCVV > input').val();
     var quantity = $('#Quantity > input').val();
     var email = $('#Email > input').val();
+    if(!quantity){
+        $('#Quantity > div').fadeIn();
+        return;
+    }else{
+        $('#Quantity > div').fadeOut();
+    }
+
+    if(!email){
+        $('#Email > div').fadeIn();
+        return;
+    }else{
+        $('#Email > div').fadeOut();
+    }
+
+    if(!cardNo){
+        $('#CardNo > div').fadeIn();
+        return;
+    }else{
+        $('#CardNo > div').fadeOut();
+    }
+
+    if(!cardExp){
+        $('#CardExp > div').fadeIn();
+        return;
+    }else{
+        $('#CardExp > div').fadeOut();
+    }
+
+    if(!cardCVV){
+        $('#CardCVV > div').fadeIn();
+        return;
+    }else{
+        $('#CardCVV > div').fadeOut();
+    }
+
+    $('#Pay').hide();
+    $('#Wait').fadeIn();
+    var mm = cardExp.substring(0,2);
+    var yy = cardExp.substring(2,2);
     $.getJSON(bturl + '/token',function(data){
         var client = new braintree.api.Client({clientToken:data.clientToken});
         var card = {
             number: cardNo,
-            expirationDate: cardExp,
+            expirationDate: mm + '/' + yy,
             cvv: cardCVV,
         };
         client.tokenizeCard(card,function(err,nonce){
@@ -121,7 +164,6 @@ function download(data){
 function submitAgain(){
     $('#Wait').hide();
     $('#Again').fadeIn();
-    clear();
 }
 
 function failInput(){
