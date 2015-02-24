@@ -9,7 +9,6 @@
 var transactionurl = 'http://008.io/transaction';
 var productID = '{{ticketID}}';
 var retail = '{{retail}}';
-console.log(retail);
 
 $.getJSON(transactionurl+'/reportTickets?id=' + productID,function(data){
 	$.each(data.transactions,function(key,value){
