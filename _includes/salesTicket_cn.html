@@ -13,8 +13,8 @@ var retail = '{{retail}}';
 $.getJSON(transactionurl+'/reportTickets?id=' + productID,function(data){
 	$.each(data.transactions,function(key,value){
 		var date = new Date(value.ts);
-		var ds = date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
-		$('<tr><th>'+ ds() +'</th><th>'+value.email+'</th><th>'+value.quantity+'</th></tr>').appendTo($('#transactions'));
+		var ds = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+		$('<tr><th>'+ ds +'</th><th>'+value.email+'</th><th>'+value.quantity+'</th></tr>').appendTo($('#transactions'));
 	});
 	$('#Inventory').text(data.upload - data.download);
 	$('#TotalSales').text(data.download * parseInt(retail));
