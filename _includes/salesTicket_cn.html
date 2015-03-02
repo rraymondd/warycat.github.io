@@ -1,7 +1,11 @@
 <hr class="star-primary">
 <h3>总销量: $<span id="TotalSales">0</span> 库存: <span id="Inventory"></span></h3>
-<table id="transactions" class="table">
-<tr><th>时间</th><th>邮箱</th><th>数量</th></tr>
+<table id="transactions" class="layout display responsive-table">
+<thead>
+	<tr><th>时间</th><th>邮箱</th><th>数量</th></tr>
+</thead>
+<tbody>
+</tbody>
 </table>
 
 <script>
@@ -14,10 +18,95 @@ $.getJSON(transactionurl+'/reportTickets?id=' + productID,function(data){
 	$.each(data.transactions,function(key,value){
 		var date = new Date(value.ts);
 		var ds = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
-		$('<tr><th>'+ ds +'</th><th>'+value.email+'</th><th>'+value.quantity+'</th></tr>').appendTo($('#transactions'));
+		$('<tr><td class="organisationnumber">'+ ds +'</td><td>'+value.email+'</td><td>'+value.quantity+'</td></tr>').appendTo($('#transactions > tbody'));
 	});
 	$('#Inventory').text(data.upload - data.download);
 	$('#TotalSales').text(data.download * parseInt(retail));
 });
 
 </script>
+
+<style>
+table th,
+table td{
+  text-align: left;
+}
+table.layout{
+  width: 100%;
+  border-collapse: collapse;
+}
+table.display{
+  margin: 1em 0;
+}
+table.display th,
+table.display td{
+  border: 1px solid #B3BFAA;
+  padding: .5em 1em;
+}
+
+table.display th{ background: #D5E0CC; }
+table.display td{ background: #fff; }
+
+table.responsive-table{
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 30em){
+    table.responsive-table{
+      box-shadow: none;  
+    }
+    table.responsive-table thead{
+      display: none; 
+    }
+  table.display th,
+  table.display td{
+    padding: .5em;
+  }
+    
+  table.responsive-table td:nth-child(1):before{
+    content: '时间';
+  }
+  table.responsive-table td:nth-child(2):before{
+    content: '邮箱';
+  }
+  table.responsive-table td:nth-child(3):before{
+    content: '数量';
+  }
+  table.responsive-table td:nth-child(1),
+  table.responsive-table td:nth-child(2),
+  table.responsive-table td:nth-child(3){
+    padding-left: 25%;
+  }
+  table.responsive-table td:nth-child(1):before,
+  table.responsive-table td:nth-child(2):before,
+  table.responsive-table td:nth-child(3):before{
+    position: absolute;
+    left: .5em;
+    font-weight: bold;
+  }
+  
+    table.responsive-table tr,
+    table.responsive-table td{
+        display: block;
+    }
+    table.responsive-table tr{
+        position: relative;
+        margin-bottom: 1em;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    }
+    table.responsive-table td{
+        border-top: none;
+    }
+    table.responsive-table td.organisationnumber{
+        background: #D5E0CC;
+        border-top: 1px solid #B3BFAA;
+    }
+    table.responsive-table td.actions{
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: none;
+        background: none;
+    }
+}
+</style>

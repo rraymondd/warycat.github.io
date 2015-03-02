@@ -1,0 +1,13 @@
+<hr class="star-primary">
+<h3>订单号：<span id='orderId'></span></h3>
+<ul id="batch" class="list-group btn-lg"></ul>
+
+<script>
+var confirmItem = JSON.parse($.cookie().confirmItem);
+$('#orderId').text(confirmItem.orderId);
+$.each(confirmItem.batch,function(key,value){
+	$('<li class="list-group-item">'+ value +'</li>').appendTo('#batch');
+});
+</script>
+
+

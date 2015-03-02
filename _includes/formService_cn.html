@@ -1,13 +1,33 @@
 <hr class="star-primary">
 <h3>服务订购</h3>
 <img src="/img/ccs.jpg" class="img-responsive img-centered" />
-
 <div class="row control-group">
-    <div id="Email" class="form-group col-xs-9 floating-label-form-group controls">
-        <label>取票邮箱</label>
+    <div id="ServiceID" class="form-group col-md-6 floating-label-form-group controls">
+        <label>服务项目</label>
+        <select type="text" class="form-control">
+        <option disabled value="">选择服务项目</option>
+        </select>
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+
+    <div id="Email" class="form-group col-md-6 floating-label-form-group controls">
+        <label>发票邮箱</label>
         <input type="email" class="form-control" placeholder="someone@example.com">
         <div name="isRequired" class="text-danger tidy">必填</div>
     </div>
+
+    <div id="CardHolder" class="form-group col-md-6 floating-label-form-group controls">
+        <label>持卡人</label>
+        <input type="text" class="form-control" placeholder="Johnny Appleseed">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+
+    <div id="Phone" class="form-group col-md-6 floating-label-form-group controls">
+        <label>手机</label>
+        <input type="tel" class="form-control" placeholder="Johnny Appleseed">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+
     <div id="CardNo" class="form-group col-xs-12 floating-label-form-group controls">
         <label>信用卡号码</label>
         <input type="tel" class="form-control" placeholder="XXXX XXXX XXXX XXXX">
@@ -25,7 +45,7 @@
     </div>
     <div id="Pay" class="form-group col-xs-12 floating-label-form-group controls">
         <label>安全支付</label>
-        <button class="btn btn-success btn-block" type="button">特价: $<span id="total">0</span></button>
+        <button class="btn btn-success btn-block" type="button">WARYCAT : $<span id="amount">0</span></button>
     </div>
     <div id="Wait" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
         <label>正在处理</label>
@@ -35,13 +55,9 @@
         <label>收款失败，请正确填写信用卡信息。</label>
         <button class="btn btn-danger btn-block" type="button">重新填写</button>
     </div>
-    <div id="Soldout" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
-        <label>扣款成功，电子票已售完，我们会人工为你开票。</label>
-        <button class="btn btn-danger btn-block" type="button">联系客服 (310-697-0345)</button>
-    </div>
-    <div id="Download" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
+    <div id="Confirm" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
         <label>交易成功，邮件已发送。</label>
-        <button class="btn btn-primary btn-block" type="button">直接下载</button>
+        <button class="btn btn-primary btn-block" type="button">查看订单</button>
     </div>
 </div>
 
@@ -49,28 +65,36 @@
 
 <script>
 
-var retail = '{{retail}}';
-var productID = '{{ticketID}}';
-
-$('#Quantity > input').change(function(){
-    var quantity = $('#Quantity > input').val();
-    $('#total').text(parseInt(retail) * parseInt(quantity));
+var json = '{{json}}';
+var dict = JSON.parse(json);
+$.each(dict.services,function(key,service){
+    var $option = $('<option value='+ key +'>' + service.title +'</option>');
+    $('#ServiceID > select').append($option);
 });
 
-var bturl = 'https://008.io/braintree/2';
+$('#ServiceID > select').change(function(){
+    var v = $('#ServiceID > select').val();
+    console.log(dict.services[v]);
+    $('#amount').text(dict.services[v].retail);
+});
+
+var bturl = 'https://008.io/braintree/1';
 // var bturl = 'http://localhost:3000/braintree/0';
 $('#Pay > button').click(function(){
-    // successInput();
+    failInput();
+    var serviceID = $('#ServiceID > select').val();
+    var email = $('#Email > input').val();
+    var phone = $('#Phone > input').val();
+    var cardHolder = $('#CardHolder > input').val();
     var cardNo = $('#CardNo > input').val();
     var cardExp = $('#CardExp > input').val();
     var cardCVV = $('#CardCVV > input').val();
-    var quantity = $('#Quantity > input').val();
-    var email = $('#Email > input').val();
-    if(!quantity){
-        $('#Quantity > div').fadeIn();
+
+    if(!serviceID){
+        $('#ServiceID > div').fadeIn();
         return;
     }else{
-        $('#Quantity > div').fadeOut();
+        $('#ServiceID > div').fadeOut();
     }
 
     if(!email){
@@ -78,6 +102,20 @@ $('#Pay > button').click(function(){
         return;
     }else{
         $('#Email > div').fadeOut();
+    }
+
+    if(!email){
+        $('#Phone > div').fadeIn();
+        return;
+    }else{
+        $('#Phone > div').fadeOut();
+    }
+
+    if(!cardHolder){
+        $('#CardHolder > div').fadeIn();
+        return;
+    }else{
+        $('#CardHolder > div').fadeOut();
     }
 
     if(!cardNo){
@@ -105,27 +143,33 @@ $('#Pay > button').click(function(){
     $('#Wait').fadeIn();
     var mm = cardExp.substring(0,2);
     var yy = cardExp.substring(2,4);
-    console.log(mm,yy);
     $.getJSON(bturl + '/token',function(data){
         var client = new braintree.api.Client({clientToken:data.clientToken});
         var card = {
             number: cardNo,
+            cardholderName: cardHolder,
             expirationDate: mm + '/' + yy,
             cvv: cardCVV,
         };
         client.tokenizeCard(card,function(err,nonce){
-          if(!err){
-            var item = {nonce:nonce,productID:productID,quantity:quantity,email:email};
+            if(err) {
+                console.log(err);
+                return;
+            }
+            var merchantID = dict.merchantID;
+            var productID = merchantID + '#' + serviceID; 
+            var item = {nonce:nonce,serviceID:serviceID,productID:productID,cardHolder:cardHolder,phone:phone,merchantID:dict.merchantID,email:email};
             $.ajax({
                 type: "POST",
-                url: bturl + '/nonce',
+                url: bturl + '/service/nonce',
                 data: JSON.stringify(item),
                 success: function(data){
                     if(data.success){
-                        if(data.downloadItem.error){
+                        if(data.confirmItem.error){
                             soldout();
                         }else{
-                            download(data);
+                            console.log(data.confirmItem);
+                            confirm(data);
                         }
                     }else{
                         console.log(data);
@@ -133,30 +177,25 @@ $('#Pay > button').click(function(){
                     }
                 },
                 failure: function(errMsg){
-                    alert(JSON.stringify(errMsg));
+                    console.log(errMsg);
+                    // alert(JSON.stringify(errMsg));
                 }
             });
-          }
         });
     });
 });
-
-function soldout(){
-    $('#Wait').hide();
-    $('#Soldout').fadeIn();
-}
 
 $('#Again > button').click(function(){
     $('#Pay').fadeIn();
     $('#Again').hide();
 });
 
-function download(data){
+function confirm(data){
     $('#Wait').hide();
-    $('#Download').fadeIn();
-    $('#Download').click(function(){
-        $.cookie('downloadItem',JSON.stringify(data.downloadItem),{path:'/'});
-        window.location.href = '/thanksTicket_cn';
+    $('#Confirm').fadeIn();
+    $('#Confirm').click(function(){
+        $.cookie('confirmItem',JSON.stringify(data.confirmItem),{path:'/'});
+        window.location.href = '/thanksService_cn';
     });
 }
 
@@ -166,29 +205,24 @@ function submitAgain(){
 }
 
 function failInput(){
+    $('#ServiceID > select').val('tax2015a');
+    $('#CardHolder > input').val('YINCHU XIA');
     $('#CardNo > input').val('4111111111111111');
     $('#CardCVV > input').val('123');
     $('#CardExp > input').val('1219');
-    $('#Quantity > input').val('37');
+    $('#Phone > input').val('6266286332');
     $('#Email > input').val('larry.fantasy@gmail.com');
 }
 
 function successInput(){
+    $('#ServiceID > select').val('tax2015a');
+    $('#CardHolder > input').val('YINCHU XIA');
     $('#CardNo > input').val('4111111111111111');
     $('#CardCVV > input').val('123');
     $('#CardExp > input').val('1219');
-    $('#Quantity > input').val('2');
+    $('#Phone > input').val('6266286332');
     $('#Email > input').val('larry.fantasy@gmail.com');
 }
-
-function soldoutInput(){
-    $('#CardNo > input').val('4111111111111111');
-    $('#CardCVV > input').val('123');
-    $('#CardExp > input').val('1219');
-    $('#Quantity > input').val('2000');
-    $('#Email > input').val('larry.fantasy@gmail.com');
-}
-
 
 function clear(){
     $('#CardNo > input').val('');

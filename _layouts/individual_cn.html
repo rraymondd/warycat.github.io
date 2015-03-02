@@ -9,6 +9,7 @@
                     <div class="modal-body">
                         <h2>{{ page.title }}</h2>
                         <hr class="star-primary">
+                        <p>{{ page.name }}</p>
                         <img src="/img/portfolio/{{ page.img }}" class="img-responsive img-centered" />
                         <p align="left">{{ page.description }}</p>
                         <div align="left">{{ content }}</div>
@@ -16,12 +17,12 @@
                         {% include contacts.html %}
                         {% for service in page.services %}
                             <a id={{service.id}} >
-                                <li class='list-group-item'>{{service.title}} 原价: <strike style='color:red'><span style='color:grey'>${{service.full}}<span></strike> 特价: <span style='color:red'>${{service.retail}}</span></li>
+                                <li id={{service[0]}} class='list-group-item'>{{service[1].title}} 原价: <strike style='color:red'><span style='color:grey'>${{service[1].full}}<span></strike> 特价: <span style='color:red'>${{service[1].retail}}</span></li>
                             </a>
                         {% endfor %}
                         </ul>
                         {% capture merchantID %}{{page.merchantID}}{% endcapture %}
-                        {% capture services %}{{page.services}}{% endcapture %}
+                        {% capture json %}{{page.json}}{% endcapture %}
                         {% include formService_cn.html %}
                         {% include friends_cn.html %}
                         {% include salesMerchant_cn.html %}
