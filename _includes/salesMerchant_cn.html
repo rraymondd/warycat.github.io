@@ -1,0 +1,23 @@
+<hr class="star-primary">
+<h3>总销量: $<span id="TotalSales">0</span> </h3>
+<table id="transactions" class="table">
+<tr><th>时间</th><th>邮箱</th><th>数量</th></tr>
+</table>
+
+<script>
+
+var transactionurl = 'http://008.io/transaction';
+var productID = '{{ticketID}}';
+var retail = '{{retail}}';
+
+$.getJSON(transactionurl+'/reportTickets?id=' + productID,function(data){
+	$.each(data.transactions,function(key,value){
+		var date = new Date(value.ts);
+		var ds = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+		$('<tr><th>'+ ds +'</th><th>'+value.email+'</th><th>'+value.quantity+'</th></tr>').appendTo($('#transactions'));
+	});
+	$('#Inventory').text(data.upload - data.download);
+	$('#TotalSales').text(data.download * parseInt(retail));
+});
+
+</script>

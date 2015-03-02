@@ -1,0 +1,201 @@
+<hr class="star-primary">
+<h3>服务订购</h3>
+<img src="/img/ccs.jpg" class="img-responsive img-centered" />
+
+<div class="row control-group">
+    <div id="Email" class="form-group col-xs-9 floating-label-form-group controls">
+        <label>取票邮箱</label>
+        <input type="email" class="form-control" placeholder="someone@example.com">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="CardNo" class="form-group col-xs-12 floating-label-form-group controls">
+        <label>信用卡号码</label>
+        <input type="tel" class="form-control" placeholder="XXXX XXXX XXXX XXXX">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="CardExp" class="form-group col-xs-6 floating-label-form-group controls">
+        <label>有效期</label>
+        <input type="tel" class="form-control" placeholder="MMYY">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="CardCVV" class="form-group col-xs-6 floating-label-form-group controls">
+        <label>安全码</label>
+        <input type="tel" class="form-control" placeholder="XXX">
+        <div name="isRequired" class="text-danger tidy">必填</div>
+    </div>
+    <div id="Pay" class="form-group col-xs-12 floating-label-form-group controls">
+        <label>安全支付</label>
+        <button class="btn btn-success btn-block" type="button">特价: $<span id="total">0</span></button>
+    </div>
+    <div id="Wait" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
+        <label>正在处理</label>
+        <button class="btn btn-warning btn-block" type="button">请稍后...</button>
+    </div>
+    <div id="Again" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
+        <label>收款失败，请正确填写信用卡信息。</label>
+        <button class="btn btn-danger btn-block" type="button">重新填写</button>
+    </div>
+    <div id="Soldout" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
+        <label>扣款成功，电子票已售完，我们会人工为你开票。</label>
+        <button class="btn btn-danger btn-block" type="button">联系客服 (310-697-0345)</button>
+    </div>
+    <div id="Download" class="form-group col-xs-12 floating-label-form-group controls" style="display:none;">
+        <label>交易成功，邮件已发送。</label>
+        <button class="btn btn-primary btn-block" type="button">直接下载</button>
+    </div>
+</div>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+<script>
+
+var retail = '{{retail}}';
+var productID = '{{ticketID}}';
+
+$('#Quantity > input').change(function(){
+    var quantity = $('#Quantity > input').val();
+    $('#total').text(parseInt(retail) * parseInt(quantity));
+});
+
+var bturl = 'https://008.io/braintree/2';
+// var bturl = 'http://localhost:3000/braintree/0';
+$('#Pay > button').click(function(){
+    // successInput();
+    var cardNo = $('#CardNo > input').val();
+    var cardExp = $('#CardExp > input').val();
+    var cardCVV = $('#CardCVV > input').val();
+    var quantity = $('#Quantity > input').val();
+    var email = $('#Email > input').val();
+    if(!quantity){
+        $('#Quantity > div').fadeIn();
+        return;
+    }else{
+        $('#Quantity > div').fadeOut();
+    }
+
+    if(!email){
+        $('#Email > div').fadeIn();
+        return;
+    }else{
+        $('#Email > div').fadeOut();
+    }
+
+    if(!cardNo){
+        $('#CardNo > div').fadeIn();
+        return;
+    }else{
+        $('#CardNo > div').fadeOut();
+    }
+
+    if(!cardExp){
+        $('#CardExp > div').fadeIn();
+        return;
+    }else{
+        $('#CardExp > div').fadeOut();
+    }
+
+    if(!cardCVV){
+        $('#CardCVV > div').fadeIn();
+        return;
+    }else{
+        $('#CardCVV > div').fadeOut();
+    }
+
+    $('#Pay').hide();
+    $('#Wait').fadeIn();
+    var mm = cardExp.substring(0,2);
+    var yy = cardExp.substring(2,4);
+    console.log(mm,yy);
+    $.getJSON(bturl + '/token',function(data){
+        var client = new braintree.api.Client({clientToken:data.clientToken});
+        var card = {
+            number: cardNo,
+            expirationDate: mm + '/' + yy,
+            cvv: cardCVV,
+        };
+        client.tokenizeCard(card,function(err,nonce){
+          if(!err){
+            var item = {nonce:nonce,productID:productID,quantity:quantity,email:email};
+            $.ajax({
+                type: "POST",
+                url: bturl + '/nonce',
+                data: JSON.stringify(item),
+                success: function(data){
+                    if(data.success){
+                        if(data.downloadItem.error){
+                            soldout();
+                        }else{
+                            download(data);
+                        }
+                    }else{
+                        console.log(data);
+                        submitAgain();
+                    }
+                },
+                failure: function(errMsg){
+                    alert(JSON.stringify(errMsg));
+                }
+            });
+          }
+        });
+    });
+});
+
+function soldout(){
+    $('#Wait').hide();
+    $('#Soldout').fadeIn();
+}
+
+$('#Again > button').click(function(){
+    $('#Pay').fadeIn();
+    $('#Again').hide();
+});
+
+function download(data){
+    $('#Wait').hide();
+    $('#Download').fadeIn();
+    $('#Download').click(function(){
+        $.cookie('downloadItem',JSON.stringify(data.downloadItem),{path:'/'});
+        window.location.href = '/thanksTicket_cn';
+    });
+}
+
+function submitAgain(){
+    $('#Wait').hide();
+    $('#Again').fadeIn();
+}
+
+function failInput(){
+    $('#CardNo > input').val('4111111111111111');
+    $('#CardCVV > input').val('123');
+    $('#CardExp > input').val('1219');
+    $('#Quantity > input').val('37');
+    $('#Email > input').val('larry.fantasy@gmail.com');
+}
+
+function successInput(){
+    $('#CardNo > input').val('4111111111111111');
+    $('#CardCVV > input').val('123');
+    $('#CardExp > input').val('1219');
+    $('#Quantity > input').val('2');
+    $('#Email > input').val('larry.fantasy@gmail.com');
+}
+
+function soldoutInput(){
+    $('#CardNo > input').val('4111111111111111');
+    $('#CardCVV > input').val('123');
+    $('#CardExp > input').val('1219');
+    $('#Quantity > input').val('2000');
+    $('#Email > input').val('larry.fantasy@gmail.com');
+}
+
+
+function clear(){
+    $('#CardNo > input').val('');
+    $('#CardCVV > input').val('');
+    $('#CardExp > input').val('');
+    $('#Quantity > input').val('');
+    $('#Email > input').val('');
+}
+
+</script>

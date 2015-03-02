@@ -15,11 +15,16 @@
                         <ul class="list-group btn-lg">
                         {% include contacts.html %}
                         {% for service in page.services %}
-                            <a href="/">
-                                <li class='list-group-item'>{{service[0]}} ${{service[1]}}</li>
+                            <a id={{service.id}} >
+                                <li class='list-group-item'>{{service.title}} 原价: <strike style='color:red'><span style='color:grey'>${{service.full}}<span></strike> 特价: <span style='color:red'>${{service.retail}}</span></li>
                             </a>
                         {% endfor %}
                         </ul>
+                        {% capture merchantID %}{{page.merchantID}}{% endcapture %}
+                        {% capture services %}{{page.services}}{% endcapture %}
+                        {% include formService_cn.html %}
+                        {% include friends_cn.html %}
+                        {% include salesMerchant_cn.html %}
                     </div>
                     <div id="disqus_thread"></div>
                 </div>
