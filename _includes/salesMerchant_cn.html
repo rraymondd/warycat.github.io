@@ -1,8 +1,8 @@
 <hr class="star-primary">
-<h3>总销量: $<span id="TotalSales">0</span> 库存: <span id="Inventory"></span></h3>
+<h3>总销量: $<span id="TotalSales">0</span></h3>
 <table id="transactions" class="layout display responsive-table">
 <thead>
-	<tr><th>时间</th><th>邮箱</th><th>数量</th></tr>
+	<tr><th>时间</th><th>邮箱</th><th>金额</th></tr>
 </thead>
 <tbody>
 </tbody>
@@ -10,15 +10,15 @@
 
 <script>
 
-var transactionurl = 'http://008.io/transaction';
-var productID = '{{ticketID}}';
-var retail = '{{retail}}';
+var transactionurl = 'https://008.io/transaction';
+// var transactionurl = 'http://localhost:3000/transaction';
+var merchantID = '{{merchantID}}';
 
-$.getJSON(transactionurl+'/reportTickets?id=' + productID,function(data){
+$.getJSON(transactionurl+'/reportMerchant?id=' + merchantID,function(data){
 	$.each(data.transactions,function(key,value){
 		var date = new Date(value.ts);
 		var ds = (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
-		$('<tr><td class="organisationnumber">'+ ds +'</td><td>'+value.email+'</td><td>'+value.quantity+'</td></tr>').appendTo($('#transactions > tbody'));
+		$('<tr><td class="organisationnumber">'+ ds +'</td><td>'+value.email+'</td><td>'+'$'+value.retail+'</td></tr>').appendTo($('#transactions > tbody'));
 	});
 	$('#Inventory').text(data.upload - data.download);
 	$('#TotalSales').text(data.download * parseInt(retail));
@@ -70,7 +70,7 @@ table.responsive-table{
     content: '邮箱';
   }
   table.responsive-table td:nth-child(3):before{
-    content: '数量';
+    content: '金额';
   }
   table.responsive-table td:nth-child(1),
   table.responsive-table td:nth-child(2),
