@@ -15,9 +15,9 @@
                         <div align="left">{{ content }}</div>
                         {% capture ticketID %}{{page.ticketID}}{% endcapture %}
                         {% capture retail %}{{page.retail}}{% endcapture %}
+                        {% include salesTicket_cn.html %}
                         {% include formTicket_cn.html %}
                         {% include friends_cn.html %}
-                        {% include salesTicket_cn.html %}
                     </div>
                     <div id="disqus_thread"></div>
                 </div>
