@@ -1,7 +1,7 @@
 ---
 layout: individual
-merchant-id: maqiao
-img: circus.png
+merchant-id: rraymondd
+img: 
 email: Ramtinj1986@gmail.com
 description: Java, C#, C , VB, ASP.NET MVC, Maven, Hibernate, Spring framework, Javascript, HTML, CSS, Bootstrap, Ajax, SQL server, Postgresql, android
 services:
