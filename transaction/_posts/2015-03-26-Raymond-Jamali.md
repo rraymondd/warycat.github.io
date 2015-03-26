@@ -10,16 +10,7 @@ services:
 
 ---
 
-Web developer, programmer and IT consultant 
-Email: Ramtinj1986@gmail.com
-
-Technical Skills
-Language: Java, C#, VB, C, Javascript, HTML/CSS
-Database: SQL, MySQL, PostgreSQL
-Theory: Algorithm, Data structure, Computer networking, Cryptography.
-Framework: Java Spring MVC, Asp.net MVC
-Library and Technique: JQuery, Ajax
-Networking: Firewall setup, Router and switch setup, network administration
-Hardware: Desktop PC assembling - PC and laptop upgrade
-Version Control: Git, SVN
-Software: Eclipse, Visual Studio, Netbeans, MS Offices
+An accomplished computer scientist with experience in software development, web design and IT consulting. This includes 
+experience with Windows and Unix based applications, web applications and GUI development. In addition experience in
+installation, design, administration, configuration and troubleshooting of LAN/WAN infrastructure and security using 
+Cisco PIX/Switches/Cisco routers and various firewalls.
